@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.12.4)  19 FEB 2013 11:44
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.12.4)  20 FEB 2013 01:46
 entering extended mode
 **deliverable_2.tex
 
@@ -563,51 +563,140 @@ Underfull \hbox (badness 10000) in paragraph at lines 75--76
 
  []
 
-[2] <Images/Big_Picture.jpg, id=56, 944.7797pt x 368.87813pt>
+[2] <Images/Big_Picture.jpg, id=68, 944.7797pt x 368.87813pt>
 File: Images/Big_Picture.jpg Graphic file (type jpg)
 
 <use Images/Big_Picture.jpg>
-Package pdftex.def Info: Images/Big_Picture.jpg used on input line 102.
+Package pdftex.def Info: Images/Big_Picture.jpg used on input line 101.
 (pdftex.def)             Requested size: 472.38869pt x 184.4386pt.
 
-No file deliverable_2.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 113.
-[3
+Underfull \hbox (badness 1394) in paragraph at lines 114--115
+[]\OT1/ptm/m/n/10 We uti-lize Python's Nat-u-ral lan-guage Toolkit's
+ []
 
-] [4 <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverable 2/Images/Bi
-g_Picture.jpg>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 113.
+<Images/arch1.png, id=70, 628.59843pt x 697.8572pt>
+File: Images/arch1.png Graphic file (type png)
+ <use Images/arch1.png>
+Package pdftex.def Info: Images/arch1.png used on input line 126.
+(pdftex.def)             Requested size: 293.06258pt x 312.97864pt.
+
+Overfull \hbox (41.06258pt too wide) in paragraph at lines 126--127
+ [][] 
+ []
+
+
+Underfull \vbox (badness 5756) has occurred while \output is active []
+
+ [3 <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverable 2/Images/arc
+h1.png>]
+<Images/arch2.png, id=85, 1023.07219pt x 963.6pt>
+File: Images/arch2.png Graphic file (type png)
+ <use Images/arch2.png>
+Package pdftex.def Info: Images/arch2.png used on input line 137.
+(pdftex.def)             Requested size: 293.06163pt x 312.97514pt.
+
+Overfull \hbox (41.06163pt too wide) in paragraph at lines 137--138
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 145--149
+
+ []
+
+[4 <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverable 2/Images/Big_
+Picture.jpg> <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverable 2/I
+mages/arch2.png>] <Images/arch3.png, id=100, 490.83376pt x 630.10406pt>
+File: Images/arch3.png Graphic file (type png)
+
+<use Images/arch3.png>
+Package pdftex.def Info: Images/arch3.png used on input line 176.
+(pdftex.def)             Requested size: 199.16855pt x 227.61607pt.
+ [5 <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverable 2/Images/arc
+h3.png>]
+<Images/arch4.png, id=116, 627.84563pt x 783.67781pt>
+File: Images/arch4.png Graphic file (type png)
+ <use Images/arch4.png>
+Package pdftex.def Info: Images/arch4.png used on input line 195.
+(pdftex.def)             Requested size: 199.16153pt x 227.61948pt.
+
+<Images/class1.png, id=118, 796.47563pt x 372.64218pt>
+File: Images/class1.png Graphic file (type png)
+ <use Images/class1.png>
+Package pdftex.def Info: Images/class1.png used on input line 204.
+(pdftex.def)             Requested size: 398.23685pt x 186.32063pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+<Images/Main.png, id=123, 451.6875pt x 401.5pt>
+File: Images/Main.png Graphic file (type png)
+ <use Images/Main.png>
+Package pdftex.def Info: Images/Main.png used on input line 223.
+(pdftex.def)             Requested size: 225.84319pt x 200.7495pt.
+
+<Images/recognize.png, id=124, 451.6875pt x 401.5pt>
+File: Images/recognize.png Graphic file (type png)
+
+<use Images/recognize.png>
+Package pdftex.def Info: Images/recognize.png used on input line 230.
+(pdftex.def)             Requested size: 225.84319pt x 200.7495pt.
+ <Images/generate.png, id=125, 451.6875pt x 401.5pt>
+File: Images/generate.png Graphic file (type png)
+
+<use Images/generate.png>
+Package pdftex.def Info: Images/generate.png used on input line 237.
+(pdftex.def)             Requested size: 225.84319pt x 200.7495pt.
+ <Images/tool.png, id=126, 451.6875pt x 401.5pt>
+File: Images/tool.png Graphic file (type png)
+
+<use Images/tool.png>
+Package pdftex.def Info: Images/tool.png used on input line 244.
+(pdftex.def)             Requested size: 225.84319pt x 200.7495pt.
+
+No file deliverable_2.bbl.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 251.
+[6 <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverable 2/Images/arch
+4.png> <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverable 2/Images/
+Main.png>] [7 <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverable 2/
+Images/class1.png> <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverab
+le 2/Images/recognize.png> <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/D
+eliverable 2/Images/generate.png> <C:/Users/Arvind/Downloads/GitHub/Poetry_Fram
+ework/Deliverable 2/Images/tool.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 251.
 
 ("C:\Users\Arvind\Downloads\GitHub\Poetry_Framework\Deliverable 2\deliverable_2
 .aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 113.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 113.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 251.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 251.
 Package rerunfilecheck Info: File `deliverable_2.out' has not changed.
-(rerunfilecheck)             Checksum: 9A81B0418E4BBB38AD29178740BB8A87;241.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 113.
+(rerunfilecheck)             Checksum: A4EA40788B250B539B5D8B393289AA92;440.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 251.
  ) 
 Here is how much of TeX's memory you used:
- 9411 strings out of 494045
- 146746 string characters out of 3148384
- 239843 words of memory out of 3000000
- 12605 multiletter control sequences out of 15000+200000
+ 9503 strings out of 494045
+ 148103 string characters out of 3148384
+ 240567 words of memory out of 3000000
+ 12654 multiletter control sequences out of 15000+200000
  38232 words of font info for 68 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 36i,7n,38p,1031b,407s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,7n,38p,1031b,411s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
 s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fon
 ts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
 sfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
-urw/times/utmri8a.pfb>
-Output written on deliverable_2.pdf (4 pages, 205196 bytes).
+/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ur
+w/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.p
+fb>
+Output written on deliverable_2.pdf (7 pages, 640619 bytes).
 PDF statistics:
- 109 PDF objects out of 1000 (max. 8388607)
- 24 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 206 PDF objects out of 1000 (max. 8388607)
+ 58 named destinations out of 1000 (max. 500000)
+ 115 words of extra memory for PDF output out of 10000 (max. 10000000)
 
