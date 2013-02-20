@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.12.4)  20 FEB 2013 01:46
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.12.4)  20 FEB 2013 01:56
 entering extended mode
 **deliverable_2.tex
 
@@ -632,30 +632,30 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <Images/Main.png, id=123, 451.6875pt x 401.5pt>
 File: Images/Main.png Graphic file (type png)
  <use Images/Main.png>
-Package pdftex.def Info: Images/Main.png used on input line 223.
+Package pdftex.def Info: Images/Main.png used on input line 222.
 (pdftex.def)             Requested size: 225.84319pt x 200.7495pt.
 
 <Images/recognize.png, id=124, 451.6875pt x 401.5pt>
 File: Images/recognize.png Graphic file (type png)
 
 <use Images/recognize.png>
-Package pdftex.def Info: Images/recognize.png used on input line 230.
+Package pdftex.def Info: Images/recognize.png used on input line 229.
 (pdftex.def)             Requested size: 225.84319pt x 200.7495pt.
  <Images/generate.png, id=125, 451.6875pt x 401.5pt>
 File: Images/generate.png Graphic file (type png)
 
 <use Images/generate.png>
-Package pdftex.def Info: Images/generate.png used on input line 237.
+Package pdftex.def Info: Images/generate.png used on input line 236.
 (pdftex.def)             Requested size: 225.84319pt x 200.7495pt.
  <Images/tool.png, id=126, 451.6875pt x 401.5pt>
 File: Images/tool.png Graphic file (type png)
 
 <use Images/tool.png>
-Package pdftex.def Info: Images/tool.png used on input line 244.
+Package pdftex.def Info: Images/tool.png used on input line 243.
 (pdftex.def)             Requested size: 225.84319pt x 200.7495pt.
 
 No file deliverable_2.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 251.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 253.
 [6 <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverable 2/Images/arch
 4.png> <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverable 2/Images/
 Main.png>] [7 <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverable 2/
@@ -663,15 +663,15 @@ Images/class1.png> <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/Deliverab
 le 2/Images/recognize.png> <C:/Users/Arvind/Downloads/GitHub/Poetry_Framework/D
 eliverable 2/Images/generate.png> <C:/Users/Arvind/Downloads/GitHub/Poetry_Fram
 ework/Deliverable 2/Images/tool.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 251.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 253.
 
 ("C:\Users\Arvind\Downloads\GitHub\Poetry_Framework\Deliverable 2\deliverable_2
 .aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 251.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 251.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 253.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 253.
 Package rerunfilecheck Info: File `deliverable_2.out' has not changed.
 (rerunfilecheck)             Checksum: A4EA40788B250B539B5D8B393289AA92;440.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 251.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 253.
  ) 
 Here is how much of TeX's memory you used:
  9503 strings out of 494045
@@ -694,7 +694,7 @@ ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files
 .9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ur
 w/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.p
 fb>
-Output written on deliverable_2.pdf (7 pages, 640619 bytes).
+Output written on deliverable_2.pdf (7 pages, 640789 bytes).
 PDF statistics:
  206 PDF objects out of 1000 (max. 8388607)
  58 named destinations out of 1000 (max. 500000)
