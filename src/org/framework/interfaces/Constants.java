@@ -29,12 +29,12 @@ public interface Constants
 	 * Types of poems: <String, Class> --May or may not be necessary.
 	 * I am adding a simpler list below.
 	 */
-	@SuppressWarnings("serial")
-	public static final Map<String, Poem> poemTypes = 
-			Collections.unmodifiableMap(new HashMap<String, Poem>()
+	@SuppressWarnings({ "serial", "rawtypes" })
+	public static final Map<String, Class> poemTypes = 
+			Collections.unmodifiableMap(new HashMap<String, Class>()
 			{
 				{
-					put("Haiku Poem", new HaikuPoem());
+					put("Haiku Poem", HaikuPoem.class);
 				}
 			});
 	
