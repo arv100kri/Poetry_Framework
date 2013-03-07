@@ -86,6 +86,7 @@ public class SimpleRhymeWords
 		return rhyme;
 	}
 	
+	/*
 	public static void main(String [] args)
 	{
 		try 
@@ -97,5 +98,5 @@ public class SimpleRhymeWords
 			LOGGER.info(e.toString());
 		}
 	}
-	
+	*/
 }
