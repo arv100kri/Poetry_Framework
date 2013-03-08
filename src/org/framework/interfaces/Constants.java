@@ -26,7 +26,10 @@ public interface Constants
 	
 	/*
 	 * Types of poems: <String, Class>
-	 * We will not be able to handle anything else except the ones listed below
+	 * We will not be able to handle anything else except the ones listed below.
+	 * We will be adding newer ones as we progress.
+	 * 
+	 * NOTE: Two additions are required for every new poetry type
 	 */
 	
 	public static final String HAIKU_POEM = "Haiku Poem";
