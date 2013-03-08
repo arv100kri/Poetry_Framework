@@ -1,12 +1,12 @@
 package org.framework.interfaces;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import org.framework.poemtypes.CoupletPoem;
 import org.framework.poemtypes.HaikuPoem;
+import org.framework.poemtypes.LimerickPoem;
 
 public interface Constants 
 {
@@ -25,25 +25,22 @@ public interface Constants
 	public static final int DEFAULT_LIMIT = 10;
 	
 	/*
-	 * Types of poems: <String, Class> --May or may not be necessary.
-	 * I am adding a simpler list below.
+	 * Types of poems: <String, Class>
+	 * We will not be able to handle anything else except the ones listed below
 	 */
+	
+	public static final String HAIKU_POEM = "Haiku Poem";
+	public static final String LIMERICK_POEM = "Limerick Poem";
+	public static final String COUPLET_POEM = "Couplet Poem";
+	
 	@SuppressWarnings({ "serial", "rawtypes" })
 	public static final Map<String, Class> poemTypes = 
 			Collections.unmodifiableMap(new HashMap<String, Class>()
 			{
 				{
-					put("Haiku Poem", HaikuPoem.class);
+					put(HAIKU_POEM, HaikuPoem.class);
+					put(LIMERICK_POEM, LimerickPoem.class);
+					put(COUPLET_POEM, CoupletPoem.class);
 				}
 			});
-	
-	@SuppressWarnings("serial")
-	public static final List<String> poetrytypes =
-			Collections.unmodifiableList(new ArrayList<String>()
-			{		
-				{
-					add("Haiku Poem");
-				}
-			});
-	
 }

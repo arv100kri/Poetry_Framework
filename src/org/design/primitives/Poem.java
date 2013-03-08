@@ -6,9 +6,18 @@ import java.util.List;
 abstract public class Poem 
 {
 	private String poemType;
+	private String poemTitle;
 	private PoemCharacteristic poemCharacteristic;
 	private List<String> lines;
 	
+	public String getPoemTitle() {
+		return poemTitle;
+	}
+
+	public void setPoemTitle(String poemTitle) {
+		this.poemTitle = poemTitle;
+	}
+
 	public List<String> getLines() {
 		return lines;
 	}
@@ -32,5 +41,16 @@ abstract public class Poem
 	public void setPoemType(String poemType) {
 		this.poemType = poemType;
 	}
-	
+
+	@Override
+	public String toString() 
+	{
+		String returner = "Poem Type= " + poemType+"\n\n";
+		returner += poemTitle + "\n=================================================\n\n";
+		for(String line : this.lines)
+		{
+			returner += line+ "\n";
+		}
+		return returner;
+	}
 }

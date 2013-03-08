@@ -26,4 +26,24 @@ public class PoemSkeleton
 		this.hints = hints;
 	}
 	
+	@Override
+	public String toString() 
+	{
+		String returner = "Poem Type= " + poem.getPoemType()+"\n\n";
+		returner += poem.getPoemTitle() + "\n=================================================\n\n";
+		for(String line : poem.getLines())
+		{
+			returner += line + "\n";
+		}
+		
+		returner += "\n\n====================HINTS======================\n\n";
+		for(String hint : this.getHints())
+		{
+			returner += hint+"\n";
+		}
+		
+		return returner;
+	}
+
+	
 }
