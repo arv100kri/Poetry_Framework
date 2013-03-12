@@ -1,0 +1,124 @@
+Couplet
+=======
+Scheme: AA
+Stanzas: 1
+Meter: None
+
+ABC
+====
+Scheme: None
+Stanzas: 1
+Meter: None
+Other: First letter of each line in alphabetical
+
+Cinquain
+========
+Scheme: None
+Stanzas: 1
+Meter: words: 1-2-3-4-1
+       or
+       2-4-6-8-2
+
+English Sonnet
+==============
+Scheme: ABAB CDCD EFEF GG
+        ABBA CDDC EFFE GG
+Stanzas:  3 quatrains and 1 couplet
+Meter:  Iambic Pentameter
+
+
+Italian Sonnet
+==============
+Scheme: ABBA ABBA CDCDCD
+                  CDDCDC
+                  CDECDE
+                  CDECED
+                  CDCEDC
+Stanzas:  1 octave 1 sestet
+Meter:  Iambic Pentameter
+
+Blank Verse
+==============
+Scheme: None
+Stanzas: None
+Meter:  Iambic Pentameter
+
+Limerick
+=======
+Scheme:
+Stanzas:
+Meter:  A : trimeter
+        B : dimeter
+
+Villanelle
+==========
+Scheme: A1bA2 abA1 abA2 abA1 abA2 abA1A2 (A1 and A2 = refrains)
+Stanzas: 5 tercets 1 quatrain
+Meter: trimeter/ tetrameter/ pentameter
+
+Haiku
+=======
+Scheme: None
+Stanzas: 1
+Meter: 5-7-5
+
+Tanka
+=====
+Scheme: None
+Stanzas: 1
+Meter: 5-7-5-7-7
+
+Ballade
+=======
+Scheme: abbabbcbC x 3 (w/ same final line) bcbC (w/ same final line)
+Stanzas: 3 + 1
+Meter: Iambic tetrameter/pentameter
+
+Generic Ode
+===========
+Scheme: Every line rhymes with at least one other line in same stanza
+Stanzas: > 1 with same meter + scheme
+Meter: Varies
+
+English Ode
+===========
+Scheme: ABABCDECDE x3
+Stanzas: 3
+Meter: Iambic Pentameter
+
+Irregular Ode
+=============
+Scheme: ABABACDDC x3 but "relaxed"
+Stanzas: 3
+Meter:  None
+
+Ghazal
+======
+Scheme: AA BB ...
+Stanzas: 5-15 usually 7
+Meter:
+Other: Refrain at end of first two lines and every 2nd line after
+
+Rondeau
+=======
+Scheme:
+Stanzas:
+Meter:
+
+Senryu
+=======
+Scheme:
+Stanzas:
+Meter:
+
+Sestina
+=======
+Scheme:
+Stanzas:
+Meter:
+
+Terza Rima
+==========
+Scheme:
+Stanzas:
+Meter:

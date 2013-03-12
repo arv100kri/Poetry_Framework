@@ -3,13 +3,13 @@ package org.design.primitives;
 import java.util.List;
 
 
-abstract public class Poem 
+abstract public class Poem
 {
 	private String poemType;
 	private String poemTitle;
 	private PoemCharacteristic poemCharacteristic;
 	private List<String> lines;
-	
+
 	public String getPoemTitle() {
 		return poemTitle;
 	}
@@ -43,7 +43,7 @@ abstract public class Poem
 	}
 
 	@Override
-	public String toString() 
+	public String toString()
 	{
 		String returner = "Poem Type= " + poemType+"\n\n";
 		returner += poemTitle + "\n=================================================\n\n";

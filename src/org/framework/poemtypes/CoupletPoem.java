@@ -4,7 +4,7 @@ import org.design.primitives.Poem;
 import org.design.primitives.PoemCharacteristic;
 import org.framework.interfaces.CoupletConstants;
 
-public class CoupletPoem extends Poem 
+public class CoupletPoem extends Poem
 {
 
 	public CoupletPoem()
