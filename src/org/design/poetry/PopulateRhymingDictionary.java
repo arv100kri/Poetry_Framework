@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 import org.design.db.SingletonDatabaseConnection;
 import org.design.primitives.Word;
-import org.global.interfaces.Constants;
+import org.framework.interfaces.Constants;
 
 public class PopulateRhymingDictionary 
 {
