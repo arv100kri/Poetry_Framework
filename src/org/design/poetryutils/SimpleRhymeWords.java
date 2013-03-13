@@ -101,8 +101,8 @@ public class SimpleRhymeWords
 	
 	public static int getSyllablesCount(String word)
 	{
-		int syllable_count = 0;
 		//If the word is not in the cmudict this will fail!!
+		int syllable_count = 0;
 		String executable = "python resources/syllables.py "+word;
 		try 
 		{
@@ -112,7 +112,13 @@ public class SimpleRhymeWords
 
 		    // read the output from the command
 		    //System.out.println("Here is the standard output of the command:");
-		    syllable_count = Integer.parseInt(stdInput.readLine());
+		    String s = stdInput.readLine();
+		    s = s.substring(1, s.length() - 1);
+		    String [] splitters = s.split(", ");
+		    for(String str: splitters)
+		    {
+		    	syllable_count+=Integer.parseInt(str);
+		    }
 		} 
 		catch (IOException e) 
 		{

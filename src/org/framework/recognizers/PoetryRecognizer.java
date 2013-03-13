@@ -39,15 +39,16 @@ public class PoetryRecognizer
 				List<Integer> syllableOrder = new ArrayList<Integer>();
 				for(String line : lines)
 				{
-					int syllables_in_line = 0;
 					List<String> words = Arrays.asList(line.split(" ")); //Assuming that words are separated by spaces
+					String python_argument = "";
 					for(String word: words)
 					{
-						int syll_word = SimpleRhymeWords.getSyllablesCount(word);
-						totalNumberOfSyllables += syll_word;
-						syllables_in_line += syll_word;
+						python_argument +=word+",";
 					}
+					python_argument = python_argument.substring(0, python_argument.length() - 1);
+					int syllables_in_line = SimpleRhymeWords.getSyllablesCount(python_argument);
 					syllableOrder.add(syllables_in_line);
+					totalNumberOfSyllables += syllables_in_line;
 				}
 				
 				int actual_syllables = poem.getPoemCharacteristic().getNumber_of_syllables();

@@ -9,4 +9,8 @@ def nsyl(word):
 		returner = 0
 	return returner
 
-print nsyl(sys.argv[1])
+word_list = sys.argv[1].split(",")
+syllable_count = []
+for word in word_list:
+	syllable_count.append(nsyl(word))
+print syllable_count
