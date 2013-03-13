@@ -1,5 +1,7 @@
 package org.design.poetryutils;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -95,4 +97,17 @@ public class SimpleRhymeWords
 		myConnection.closeConnection();
 		return rhyme;
 	}
+	
+	public static List<String> getSyllables(String word)
+	{
+		SingletonDatabaseConnection myConnection = SingletonDatabaseConnection.getInstance(Constants.databaseUrl, Constants.userName, Constants.password);
+		Word word1 = myConnection.selectWord(word);
+		if(word1 == null)
+		{
+			return Collections.emptyList();
+		}
+		else
+			return word1.getSyllables();		
+	}
+
 }

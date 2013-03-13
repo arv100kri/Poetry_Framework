@@ -6,6 +6,17 @@ Project Members:
 3) Sonal Danak
 4) Michelle Scott
 
+Instructions
+============
+
+1)* Clone the repo
+2) Go to Eclipse -> New -> Project -> Java Project
+3) Name the project Poetry_Framework. Finish
+4) Drag and drop all the folders form the cloned repo over to this project. Replace src folder!
+5) Run PoetryFrame.java
+
+(*) Or git pull -u origin master.
+
 Package Structure
 ==================
 org.design.CMUDictUtils : Utilities to parse a line of text from the CMU dictionary and write it to the database

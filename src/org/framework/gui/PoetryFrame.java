@@ -1,13 +1,56 @@
 package org.framework.gui;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
+import java.awt.CardLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 
-import javax.swing.*;
-import javax.swing.GroupLayout.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
-public class PoetryFrame extends JFrame implements ActionListener {
+import org.design.fileutils.LargeFileReader;
+import org.design.primitives.Poem;
+import org.framework.poemtypes.CoupletPoem;
+import org.framework.poemtypes.HaikuPoem;
+import org.framework.poemtypes.LimerickPoem;
+import org.framework.recognizers.PoetryRecognizer;
+
+/*
+ * ActionListeners need to de-coupled
+ * Arvind needs to remove the hackish code done for deliverable 3, 
+ * and incorporate better checking (i.e re-write the logic of the Actionlisteners)
+ */
+
+public class PoetryFrame extends JFrame implements ActionListener, MouseListener {
 	
 	private Container mainContainer = new Container();
 	private Container proseContainer = new Container();
@@ -19,6 +62,8 @@ public class PoetryFrame extends JFrame implements ActionListener {
 	private JFileChooser fc;
 	private JTextArea prose;
 	private JTextField fileName;
+	private JScrollPane jScrollPane;
+	
 	
 	public PoetryFrame() {
 		frameInit();
@@ -93,9 +138,19 @@ public class PoetryFrame extends JFrame implements ActionListener {
 		inputPanel.setLayout(g);
 		JLabel input = new JLabel("Input");
 		fc = new JFileChooser();
-		prose = new JTextArea("Insert Prose Here");
+		prose = new JTextArea(PLACEHOLDER);
+		prose.setRows(20);
+		prose.setColumns(5);
+		
+		jScrollPane = new JScrollPane(prose);
+				
 		JLabel or = new JLabel("- or -");
 		fileName = new JTextField("Select Input File");
+		fileName.setEditable(false);
+		
+		fileName.addMouseListener(this);
+		prose.addMouseListener(this);
+		
 		JButton open = new JButton(OPEN);
 		open.addActionListener(this);
 		
@@ -103,7 +158,7 @@ public class PoetryFrame extends JFrame implements ActionListener {
 		ParallelGroup h1 = g.createParallelGroup(GroupLayout.Alignment.LEADING);
 		SequentialGroup h2 = g.createSequentialGroup();
 		h1.addComponent(input);
-		h1.addComponent(prose);
+		h1.addComponent(jScrollPane);
 		h1.addComponent(or);
 		h2.addComponent(fileName);
 		h2.addComponent(open);
@@ -117,7 +172,7 @@ public class PoetryFrame extends JFrame implements ActionListener {
 		ParallelGroup v1 = g.createParallelGroup(GroupLayout.Alignment.LEADING);
 		vGroup.addComponent(input);
 		vGroup.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
-		vGroup.addComponent(prose, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE);
+		vGroup.addComponent(jScrollPane, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE);
 		vGroup.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
 		vGroup.addComponent(or);
 		vGroup.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
@@ -131,9 +186,18 @@ public class PoetryFrame extends JFrame implements ActionListener {
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		JButton cancel = new JButton(CANCEL);
 		cancel.addActionListener(this);
+		JButton searchButton = new JButton(SEARCH);
+		searchButton.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				recognize();
+				
+			}
+		});
 		
 		buttonPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
-		buttonPanel.add(new JButton(SEARCH));
+		buttonPanel.add(searchButton);
 		buttonPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
 		buttonPanel.add(cancel);
 		buttonPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
@@ -238,7 +302,16 @@ public class PoetryFrame extends JFrame implements ActionListener {
 		cancel.addActionListener(this);
 		
 		buttonPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
-		buttonPanel.add(new JButton(GENER));
+		JButton generateButton = new JButton(GENER);
+		generateButton.addActionListener(new ActionListener() 
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO INSERT Generation code here				
+			}
+		});
+		buttonPanel.add(generateButton);
 		buttonPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
 		buttonPanel.add(cancel);
 		buttonPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
@@ -258,6 +331,7 @@ public class PoetryFrame extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		System.out.println(arg0.getActionCommand());
 		if(arg0.getActionCommand().equals(PROSE)) {
 			CardLayout cl = (CardLayout)windows.getLayout();
 			cl.show(windows, PROSE);
@@ -270,16 +344,27 @@ public class PoetryFrame extends JFrame implements ActionListener {
 		} else if(arg0.getActionCommand().equals(CANCEL)) {
 			CardLayout cl = (CardLayout)windows.getLayout();
 			cl.show(windows, CANCEL);
-		} else if(arg0.getActionCommand().equals(SEARCH)) {
-			// INSERT RECOGNIZING CODE HERE
-		} else if(arg0.getActionCommand().equals(GENER)) {
-			// INSERT GENERATING CODE HERE
-		} else if(arg0.getActionCommand().equals(OPEN)) {
+		} 
+		else if(arg0.getActionCommand().equals(OPEN)) {
 			int ret = fc.showOpenDialog(this);
 			if(ret == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				fileName.setText(file.getName());
 				//USE FILE AS NEEDED
+				java.util.List<String> lines;
+				try 
+				{
+					lines = LargeFileReader.readFile(file.getAbsolutePath());
+					for(String line: lines)
+					{
+						prose.append(line+"\n");
+					}
+				} 
+				catch (IOException e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace(); //should never happen
+				}
 			}
 		} else if(arg0.getActionCommand().equals(QUIT)) {
 			System.exit(0);
@@ -292,6 +377,27 @@ public class PoetryFrame extends JFrame implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
+		/* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PoetryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PoetryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PoetryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PoetryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				PoetryFrame f = new PoetryFrame();
@@ -311,4 +417,107 @@ public class PoetryFrame extends JFrame implements ActionListener {
 	private static final String GENER = "Generate";
 	private static final String OPEN = "...";
 	private static final String[] POEM_TYPES = {"Haiku", "Limerick", "Quatrain"};
+	private static final String JTEXTFIELD = "JTextField";
+	private static final String PLACEHOLDER = "<!---- Insert Prose Here ---- !>";
+//	private static final String JTEXTAREA = "JTextArea";
+
+	/*
+	 * Recognize the type of poem
+	 */
+	private void recognize()
+	{
+		System.out.println("Recognition logic");
+		if(prose.getText().length() == 0)
+		{
+			return;
+		}
+		// Recognize the different types of poems
+		java.util.List<String> lines = Arrays.asList(prose.getText().split("\n"));	//each line of the poem is on a new line
+		Poem poem = new HaikuPoem();
+		poem.setLines(lines);
+		if(PoetryRecognizer.isValidPoetry(poem))
+		{
+			JOptionPane.showMessageDialog(this, "HAIKU POEM");
+			return;
+		}
+		
+		poem = new LimerickPoem();
+		poem.setLines(lines);
+		if(PoetryRecognizer.isValidPoetry(poem))
+		{
+			JOptionPane.showMessageDialog(this, "LIMERICK POEM");
+			return;
+		}
+		
+		poem = new CoupletPoem();
+		poem.setLines(lines);
+		if(PoetryRecognizer.isValidPoetry(poem))
+		{
+			JOptionPane.showMessageDialog(this, "COUPLET POEM");
+			return;
+		}
+		
+		JOptionPane.showMessageDialog(this, "Not a Haiku/Couplet/Limerick");
+	}
+	
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(e.getComponent().getClass().getSimpleName().equals(JTEXTFIELD))
+		{
+			int ret = fc.showOpenDialog(this);
+			if(ret == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				fileName.setText(file.getName());
+				//USE FILE AS NEEDED
+				java.util.List<String> lines;
+				try 
+				{
+					lines = LargeFileReader.readFile(file.getAbsolutePath());
+					prose.setText("");
+					for(String line: lines)
+					{
+						prose.append(line+"\n");
+					}					
+				} 
+				catch (IOException ex) 
+				{
+					// TODO Auto-generated catch block
+					ex.printStackTrace(); //should never happen
+				}
+			}
+		}
+		
+		else
+		{
+			if(prose.getText().equals(PLACEHOLDER))
+			{
+				prose.setText("");
+			}
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

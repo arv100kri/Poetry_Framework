@@ -21,6 +21,38 @@ public class PoemCharacteristic
 	private int number_of_syllables;
 	private List<String> rhymeScheme;
 	
+	public int getNumber_of_lines() {
+		return number_of_lines;
+	}
+
+	public void setNumber_of_lines(int number_of_lines) {
+		this.number_of_lines = number_of_lines;
+	}
+
+	public List<Integer> getSyllable_count_order() {
+		return syllable_count_order;
+	}
+
+	public void setSyllable_count_order(List<Integer> syllable_count_order) {
+		this.syllable_count_order = syllable_count_order;
+	}
+
+	public int getNumber_of_syllables() {
+		return number_of_syllables;
+	}
+
+	public void setNumber_of_syllables(int number_of_syllables) {
+		this.number_of_syllables = number_of_syllables;
+	}
+
+	public List<String> getRhymeScheme() {
+		return rhymeScheme;
+	}
+
+	public void setRhymeScheme(List<String> rhymeScheme) {
+		this.rhymeScheme = rhymeScheme;
+	}
+
 	public static class PoemCharacteristicBuilder
 	{
 		private int number_of_lines;
