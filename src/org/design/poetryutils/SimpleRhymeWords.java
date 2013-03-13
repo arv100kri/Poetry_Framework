@@ -1,7 +1,8 @@
 package org.design.poetryutils;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -98,16 +99,33 @@ public class SimpleRhymeWords
 		return rhyme;
 	}
 	
-	public static List<String> getSyllables(String word)
+	public static int getSyllablesCount(String word)
 	{
-		SingletonDatabaseConnection myConnection = SingletonDatabaseConnection.getInstance(Constants.databaseUrl, Constants.userName, Constants.password);
-		Word word1 = myConnection.selectWord(word);
-		if(word1 == null)
+		int syllable_count = 0;
+		//If the word is not in the cmudict this will fail!!
+		String executable = "python resources/syllables.py "+word;
+		try 
 		{
-			return Collections.emptyList();
+			Process proc = Runtime.getRuntime().exec(executable);
+			
+			BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+
+		    // read the output from the command
+		    //System.out.println("Here is the standard output of the command:");
+		    syllable_count = Integer.parseInt(stdInput.readLine());
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
 		}
-		else
-			return word1.getSyllables();		
+		return syllable_count;
+		
 	}
+	
+	/*
+	 * We still need a get syllables method for a word
+	 */
 
 }
