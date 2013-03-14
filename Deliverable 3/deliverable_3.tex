@@ -72,7 +72,7 @@ The recognition element currently implemented is a naive version of what we woul
 
 The recognition element will take an input text and run it against each of the above 3 rule-sets and will return the first matching category of poetry it belongs to. If none of the above categories match the recognizer throws a popup giving this information.
 \subsection*{User Interface}
-As of now, the user interface consists of a main menu, from which the user can select either to find a poetry type within a piece of text (which right now is the simple recognizer) and associated windows for each of the menu items in the main menu.
+As of now, the functional components of the user interface consists of a main menu, from which the user can select either to find a poetry type within a piece of text (which right now is the simple recognizer) and associated windows for each of the menu items in the main menu.
     However, the main interface element is the recognizer element, where a user can type in text, or choose a text file; text from this would be placed in a text area and once the user clicks on the “Search” button, the recognition element will check if the input belongs to one of the three types of poems we have defined. They user interface is presented in Figures \ref{screen1} and \ref{screen2}.
     
 \begin{figure}[ht]
@@ -89,9 +89,35 @@ As of now, the user interface consists of a main menu, from which the user can s
   \label{screen2}
 \end{figure}
 
+We also have an UI in place for the generator tool. Presently, we are able to choose a text file (or the corpus of interest) for generating the poem, and we have in place a selection option for the user to choose the type of poetry he/she wants to generate. Of course, depending on the poetry, we also add additional options for the user to play around with (haikus, limericks and couplets are pretty strict, whereas quatrains are not). The UI for the generator component is presented in Figures \ref{screen3} to \ref{screen5}.
+
+\begin{figure}[ht]
+  \centering
+    \includegraphics[scale=0.5]{Images/screen3}
+    \caption{Poem Generator Window}
+  \label{screen3}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+    \includegraphics[scale=0.5]{Images/screen5}
+    \caption{Choosing an input file}
+  \label{screen4}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+    \includegraphics[scale=0.5]{Images/screen4}
+    \caption{Customizable options for the user}
+  \label{screen5}
+\end{figure}
+
+
 
 \section*{Description of the Demo}
 In the demo, we present the user interface of our application and demo the poetry tool for different input texts and show how they are classified according to the recognition element.
+
+We also have a brief interface overview of the generator tool (we are yet to implement the underlying functionality).
 
 Our code is publicly visible and is located at: \url{https://github.com/arv100kri/Poetry_Framework}
 
