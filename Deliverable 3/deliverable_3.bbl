@@ -1,0 +1,12 @@
+\begin{thebibliography}{1}
+
+\bibitem{cmudict}
+R~Weide.
+\newblock The carnegie mellon pronouncing dictionary [cmudict. 0.6], 2005.
+
+\bibitem{bird2009natural}
+Steven Bird, Ewan Klein, and Edward Loper.
+\newblock {\em Natural language processing with Python}.
+\newblock O'Reilly Media, Incorporated, 2009.
+
+\end{thebibliography}
