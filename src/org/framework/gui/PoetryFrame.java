@@ -12,7 +12,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -426,6 +428,7 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 	 */
 	private void recognize()
 	{
+		/*
 		System.out.println("Recognition logic");
 		if(prose.getText().length() == 0)
 		{
@@ -458,6 +461,49 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 		}
 		
 		JOptionPane.showMessageDialog(this, "Not a Haiku/Couplet/Limerick");
+		*/
+		try {
+			String inputFile = fc.getSelectedFile().getAbsolutePath();
+			List<Poem> couplet_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new CoupletPoem());
+			List<Poem> haiku_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new HaikuPoem());
+			List<Poem> limerick_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new LimerickPoem());
+			
+			if(couplet_poem_list.isEmpty())
+			{
+				JOptionPane.showMessageDialog(this, "No Couplet poems found");
+			}
+			if(haiku_poem_list.isEmpty())
+			{
+				JOptionPane.showMessageDialog(this, "No Haiku poems found");
+			}
+			if(limerick_poem_list.isEmpty())
+			{
+				JOptionPane.showMessageDialog(this, "No Limerick poems found");
+			}
+			if(!(limerick_poem_list.isEmpty() && //haiku_poem_list.isEmpty() && 
+					couplet_poem_list.isEmpty()))
+			{
+				String str = "Number of Couplet Poems found are: "+ couplet_poem_list.size();
+				str += "\n" + "Number of Haiku Poems found are: "+ haiku_poem_list.size();
+				str += "\n" + "Number of Limerick Poems found are: "+ limerick_poem_list.size();
+				JOptionPane.showMessageDialog(this, str);
+				
+				java.util.List<Poem> poem_list = new ArrayList<Poem>();
+				
+				poem_list.addAll(couplet_poem_list);
+				//poem_list.addAll(haiku_poem_list);
+				poem_list.addAll(limerick_poem_list);
+				
+				for(Poem p: poem_list)
+				{
+					System.out.println(p);
+				}
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

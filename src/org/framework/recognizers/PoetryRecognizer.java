@@ -3,6 +3,7 @@ package org.framework.recognizers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.design.fileutils.LargeFileReader;
@@ -10,6 +11,9 @@ import org.design.poetryutils.SimpleRhymeWords;
 import org.design.primitives.Poem;
 import org.framework.exceptions.NullWordException;
 import org.framework.interfaces.Constants;
+import org.framework.poemtypes.CoupletPoem;
+import org.framework.poemtypes.HaikuPoem;
+import org.framework.poemtypes.LimerickPoem;
 /*
  * Heavyweight class!
  * Need to add more methods 
@@ -26,7 +30,6 @@ public class PoetryRecognizer
 		 * Some logic here -- Hackish. Will only check for Haiku, Limerick or Couplet 
 		 */
 		List<String> lines = poem.getLines();
-		List<String> lastWords = LargeFileReader.getLastWord(lines);
 		String lw1, lw2, lw3, lw4, lw5;
 		switch(poem.getPoemType())
 		{
@@ -62,7 +65,8 @@ public class PoetryRecognizer
 				return true;				
 				
 			case Constants.LIMERICK_POEM:
-				if(lines.size() !=5)	//Limerick has only five lines
+				List<String> lastWords = LargeFileReader.getLastWord(lines);
+ 				if(lines.size() !=5)	//Limerick has only five lines
 				{
 					return false;
 				}
@@ -87,6 +91,7 @@ public class PoetryRecognizer
 				return false;
 				
 			case Constants.COUPLET_POEM:
+				lastWords = LargeFileReader.getLastWord(lines);
 				if(lines.size() != 2) //Couplet has only two lines
 				{
 					return false;
@@ -115,16 +120,108 @@ public class PoetryRecognizer
 	 */
 	public static List<Poem> identifyPoemsFromCorpus(String corpusFileName, Poem poem) throws IOException
 	{
-		List<String> lines_of_corpus = LargeFileReader.readFile(corpusFileName);
-		/*
-		 * Some logic here... Need to identify poems occurring in the text...
-		 * which operates on lines_of_corpus
-		 */
+		List<Poem> potentialCoupletPoems = new ArrayList<Poem>();
+		List<Poem> potentialLimerickPoems = new ArrayList<Poem>();
+		List<Poem> potentialHaikuPoems = new ArrayList<Poem>();
+		List<String> lines = LargeFileReader.readFile(corpusFileName);
+		int i =0;
+		for(; i<lines.size()-4; i++)
+		{
+			if(poem.getPoemType() == Constants.COUPLET_POEM)
+			{
+				Poem potentialCoupletPoem = new CoupletPoem();
+				List<String>couplet = Arrays.asList(new String[]{lines.get(i),lines.get(i+1)});
+				potentialCoupletPoem.setLines(couplet);
+				potentialCoupletPoem.setPoemTitle("Title");
+				potentialCoupletPoems.add(potentialCoupletPoem);
+			}
+			else if(poem.getPoemType() == Constants.HAIKU_POEM)
+			{
+				Poem potentialHaikuPoem = new HaikuPoem();
+				List<String>haiku = Arrays.asList(new String[]{lines.get(i), lines.get(i+1), lines.get(i+2)});
+				potentialHaikuPoem.setLines(haiku);
+				potentialHaikuPoem.setPoemTitle("Title");
+				potentialHaikuPoems.add(potentialHaikuPoem);
+			}
+			else if(poem.getPoemType() == Constants.LIMERICK_POEM)
+			{
+				Poem potentialLimerickPoem = new LimerickPoem();
+				List<String>limerick = Arrays.asList(new String[]{lines.get(i), lines.get(i+1), lines.get(i+2), lines.get(i+3), lines.get(i+4)});
+				potentialLimerickPoem.setLines(limerick);
+				potentialLimerickPoem.setPoemTitle("Title");
+				potentialLimerickPoems.add(potentialLimerickPoem);
+			}
+		}
+		
+		for(;i<lines.size()-2;i++)
+		{
+			if(poem.getPoemType() == Constants.COUPLET_POEM)
+			{
+				Poem potentialCoupletPoem = new CoupletPoem();
+				List<String>couplet = Arrays.asList(new String[]{lines.get(i),lines.get(i+1)});
+				potentialCoupletPoem.setLines(couplet);
+				potentialCoupletPoem.setPoemTitle("Title");
+				potentialCoupletPoems.add(potentialCoupletPoem);
+			}
+			else if(poem.getPoemType() == Constants.HAIKU_POEM)
+			{
+				Poem potentialHaikuPoem = new HaikuPoem();
+				List<String>haiku = Arrays.asList(new String[]{lines.get(i), lines.get(i+1), lines.get(i+2)});
+				potentialHaikuPoem.setLines(haiku);
+				potentialHaikuPoem.setPoemTitle("Title");
+				potentialHaikuPoems.add(potentialHaikuPoem);
+			}
+		}
+		
+		for(;i<lines.size()-1;i++)
+		{
+			if(poem.getPoemType() == Constants.COUPLET_POEM)
+			{
+				Poem potentialCoupletPoem = new CoupletPoem();
+				List<String>couplet = Arrays.asList(new String[]{lines.get(i),lines.get(i+1)});
+				potentialCoupletPoem.setLines(couplet);
+				potentialCoupletPoem.setPoemTitle("Title");
+				potentialCoupletPoems.add(potentialCoupletPoem);
+			}
+		}
+
 		List<Poem> poems_in_corpus = new ArrayList<Poem> ();
-		/*
-		 * if count > 0 --> return
-		 * else --> return Collections.empty_list()
-		 */
+		switch(poem.getPoemType())
+		{
+			case Constants.HAIKU_POEM:
+				for(Poem p: potentialHaikuPoems)
+				{
+					//System.out.println(p);
+					if(PoetryRecognizer.isValidPoetry(p))
+					{
+						poems_in_corpus.add(p);
+					}
+				}break;
+			
+			case Constants.COUPLET_POEM:
+				for(Poem p: potentialCoupletPoems)
+				{
+					//System.out.println(p);
+					if(PoetryRecognizer.isValidPoetry(p))
+					{
+						poems_in_corpus.add(p);
+					}
+				}break;
+			
+			case Constants.LIMERICK_POEM:
+				for(Poem p: potentialLimerickPoems)
+				{
+					//System.out.println(p);
+					if(PoetryRecognizer.isValidPoetry(p))
+					{
+						poems_in_corpus.add(p);
+					}
+				}break;
+		}
+		
+		if(poems_in_corpus.size() == 0)
+			return Collections.emptyList();
+			
 		return poems_in_corpus;
 	}
 }

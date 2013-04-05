@@ -2,10 +2,15 @@ package org.design.fileutils;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -25,12 +30,27 @@ public class LargeFileReader
 		List<String> lines = new ArrayList<String>();
 		while ((strLine = br.readLine()) != null)   
 		{
+			if(strLine.length()<1)
+				continue;
 			lines.add(strLine);
 		}
 		
 		in.close();
 		return lines;
 	}
+	
+	public static String readFileIntoString(String path) throws IOException {
+		  FileInputStream stream = new FileInputStream(new File(path));
+		  try {
+		    FileChannel fc = stream.getChannel();
+		    MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+		    /* Instead of using default, pass in a decoder. */
+		    return Charset.defaultCharset().decode(bb).toString();
+		  }
+		  finally {
+		    stream.close();
+		  }
+		}
 	
 	/*
 	 * Sonal's parser....This needs to be used later when reading large corpora
@@ -69,11 +89,23 @@ public class LargeFileReader
 		List<String>lastWords = new ArrayList<String> ();
 		for(String line: lines)
 		{
-			lastWords.add(line.substring(line.lastIndexOf(" ")+1));
+			String last_word = line.substring(line.lastIndexOf(" ")+1);
+			lastWords.add(sanitize(last_word));
 		}
 		return lastWords;
 	}
-
-
+	
+	public static String sanitize(String word)
+	{
+		for(int i=0; i<word.length(); i++)
+		{
+			if(!Character.isAlphabetic(word.charAt(i)))
+			{
+				word = word.replace(""+word.charAt(i), "");
+				--i;
+			}
+		}
+		return word;
+	}
 	
 }

@@ -15,4 +15,10 @@ public class CoupletPoem extends Poem
 				rhymeScheme(CoupletConstants.rhymeScheme).build();
 		this.setPoemCharacteristic(pc);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return super.toString();
+	}
 }
