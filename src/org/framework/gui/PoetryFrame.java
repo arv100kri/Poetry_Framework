@@ -22,6 +22,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
@@ -65,6 +66,7 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 	private JTextArea prose;
 	private JTextField fileName;
 	private JScrollPane jScrollPane;
+	private JTextField corpus;
 	
 	
 	public PoetryFrame() {
@@ -189,14 +191,7 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 		JButton cancel = new JButton(CANCEL);
 		cancel.addActionListener(this);
 		JButton searchButton = new JButton(SEARCH);
-		searchButton.addActionListener(new ActionListener() 
-		{
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				recognize();
-				
-			}
-		});
+		searchButton.addActionListener(this);
 		
 		buttonPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
 		buttonPanel.add(searchButton);
@@ -231,19 +226,68 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 		
 		// Create option submenus
 		cards = new JPanel(new CardLayout());
-		JPanel haiku, lim, quat;
+		JPanel haiku, lim, quat, coup;
 		haiku = new JPanel();
 		lim = new JPanel();
 		quat = new JPanel();
+		coup = new JPanel();
 		
-		cards.add(haiku, POEM_TYPES[0]);
-		cards.add(lim, POEM_TYPES[1]);
-		cards.add(quat, POEM_TYPES[2]);
+		// Define quatrain options (for demo - not final)
+		GroupLayout g_quat = new GroupLayout(quat);
+		quat.setLayout(g_quat);
+		JLabel scheme = new JLabel("Rhyme Scheme");
+		JComboBox<String> schemeBox = new JComboBox<String>(new String[]{"AABB", "ABAB"});
+		schemeBox.setPreferredSize(new Dimension(100, 25));
+		JLabel meter = new JLabel("Meter");
+		JComboBox<String> meters = new JComboBox<String>(new String[]{"Iambic"});
+		meters.setPreferredSize(new Dimension(100, 25));
+		JCheckBox allit = new JCheckBox("Alliteration");
+		JCheckBox asson = new JCheckBox("Assonance");
+		
+		SequentialGroup hGroup_quat = g_quat.createSequentialGroup();
+		ParallelGroup h1_quat = g_quat.createParallelGroup(GroupLayout.Alignment.LEADING);
+		ParallelGroup h2_quat = g_quat.createParallelGroup(GroupLayout.Alignment.LEADING);
+		
+		h1_quat.addComponent(scheme);
+		h1_quat.addComponent(meter);
+		h1_quat.addComponent(allit);
+		h1_quat.addComponent(asson);
+		h2_quat.addComponent(schemeBox, 0, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE);
+		h2_quat.addComponent(meters, 0, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE);
+		hGroup_quat.addContainerGap();
+		hGroup_quat.addGroup(h1_quat);
+		hGroup_quat.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
+		hGroup_quat.addGroup(h2_quat);
+		hGroup_quat.addContainerGap();
+		g_quat.setHorizontalGroup(hGroup_quat);
+		
+		SequentialGroup vGroup_quat = g_quat.createSequentialGroup();
+		ParallelGroup v1_quat = g_quat.createParallelGroup(GroupLayout.Alignment.LEADING);
+		ParallelGroup v2_quat = g_quat.createParallelGroup(GroupLayout.Alignment.LEADING);
+		v1_quat.addComponent(scheme, 0, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE);
+		v1_quat.addComponent(schemeBox, 0, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE);
+		v2_quat.addComponent(meter, 0, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE);
+		v2_quat.addComponent(meters, 0, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE);
+		vGroup_quat.addContainerGap();
+		vGroup_quat.addGroup(v1_quat);
+		vGroup_quat.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
+		vGroup_quat.addGroup(v2_quat);
+		vGroup_quat.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
+		vGroup_quat.addComponent(allit);
+		vGroup_quat.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
+		vGroup_quat.addComponent(asson);		
+		g_quat.setVerticalGroup(vGroup_quat);
+		
+		cards.add(coup, POEM_TYPES[0]);
+		cards.add(haiku, POEM_TYPES[1]);
+		cards.add(lim, POEM_TYPES[2]);
+		cards.add(quat, POEM_TYPES[3]);
 		
 		// Create Options menu
 		JLabel corp = new JLabel("Corpus(Optional)");
 		JLabel type = new JLabel("Poem Type");
-		JTextField corpus = new JTextField("Select a text file");
+		corpus = new JTextField("Select a text file");
+		corpus.addMouseListener(this);
 		corpus.setPreferredSize(new Dimension(300, 20));
 		JComboBox<String> poems = new JComboBox<String>(POEM_TYPES);
 		poems.addItemListener(new ItemListener() {
@@ -305,14 +349,8 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 		
 		buttonPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
 		JButton generateButton = new JButton(GENER);
-		generateButton.addActionListener(new ActionListener() 
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO INSERT Generation code here				
-			}
-		});
+		generateButton.addActionListener(this);
+		
 		buttonPanel.add(generateButton);
 		buttonPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
 		buttonPanel.add(cancel);
@@ -346,12 +384,12 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 		} else if(arg0.getActionCommand().equals(CANCEL)) {
 			CardLayout cl = (CardLayout)windows.getLayout();
 			cl.show(windows, CANCEL);
-		} 
-		else if(arg0.getActionCommand().equals(OPEN)) {
+		} else if(arg0.getActionCommand().equals(OPEN)) {
 			int ret = fc.showOpenDialog(this);
 			if(ret == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				fileName.setText(file.getName());
+				prose.setText("");
 				//USE FILE AS NEEDED
 				java.util.List<String> lines;
 				try 
@@ -368,6 +406,10 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 					e.printStackTrace(); //should never happen
 				}
 			}
+		} else if(arg0.getActionCommand().equals(SEARCH)) {
+			recognize();
+		} else if(arg0.getActionCommand().equals(GENER)) {
+			// GENERATION CODE GOES HERE
 		} else if(arg0.getActionCommand().equals(QUIT)) {
 			System.exit(0);
 		} 
@@ -418,7 +460,7 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 	private static final String SEARCH = "Search";
 	private static final String GENER = "Generate";
 	private static final String OPEN = "...";
-	private static final String[] POEM_TYPES = {"Haiku", "Limerick", "Quatrain"};
+	private static final String[] POEM_TYPES = {"Couplet", "Haiku", "Limerick", "Quatrain"};
 	private static final String JTEXTFIELD = "JTextField";
 	private static final String PLACEHOLDER = "<!---- Insert Prose Here ---- !>";
 //	private static final String JTEXTAREA = "JTextArea";
@@ -515,12 +557,12 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 			if(ret == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				fileName.setText(file.getName());
+				prose.setText("");
 				//USE FILE AS NEEDED
 				java.util.List<String> lines;
 				try 
 				{
 					lines = LargeFileReader.readFile(file.getAbsolutePath());
-					prose.setText("");
 					for(String line: lines)
 					{
 						prose.append(line+"\n");
