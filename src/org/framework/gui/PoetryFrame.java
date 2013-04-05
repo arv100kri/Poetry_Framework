@@ -10,10 +10,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.Box;
@@ -470,9 +471,9 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 	 */
 	private void recognize()
 	{
-		/*
-		System.out.println("Recognition logic");
-		if(prose.getText().length() == 0)
+		
+		//System.out.println("Recognition logic");
+		/*if(prose.getText().length() == 0)
 		{
 			return;
 		}
@@ -505,7 +506,23 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 		JOptionPane.showMessageDialog(this, "Not a Haiku/Couplet/Limerick");
 		*/
 		try {
-			String inputFile = fc.getSelectedFile().getAbsolutePath();
+			String inputFile = "";
+			if((fc == null || fc.getSelectedFile() == null) && prose.getText().equals(PLACEHOLDER)) 
+			{
+				JOptionPane.showMessageDialog(this, "Choose a file", "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			else
+			{
+				inputFile = "resources/temp";
+				File file = new File(inputFile);
+				FileWriter fw = new FileWriter(file);
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(prose.getText());
+				bw.close();
+			}
+
+			
 			List<Poem> couplet_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new CoupletPoem());
 			List<Poem> haiku_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new HaikuPoem());
 			List<Poem> limerick_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new LimerickPoem());
@@ -533,13 +550,25 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 				java.util.List<Poem> poem_list = new ArrayList<Poem>();
 				
 				poem_list.addAll(couplet_poem_list);
-				//poem_list.addAll(haiku_poem_list);
+				poem_list.addAll(haiku_poem_list);
 				poem_list.addAll(limerick_poem_list);
 				
+				File file = new File("resources/Poems_Recognized");
+				
+				if (!file.exists()) 
+				{
+					file.createNewFile();
+				}
+				
+				FileWriter fw = new FileWriter(file.getAbsoluteFile());
+				BufferedWriter bw = new BufferedWriter(fw);
+								
 				for(Poem p: poem_list)
 				{
 					System.out.println(p);
+					bw.write(p.toString());
 				}
+				bw.close();
 			}
 			
 		} catch (IOException e) {
@@ -547,7 +576,6 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 			e.printStackTrace();
 		}
 	}
-	
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {

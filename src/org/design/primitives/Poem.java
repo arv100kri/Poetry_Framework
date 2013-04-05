@@ -45,12 +45,13 @@ abstract public class Poem
 	@Override
 	public String toString() 
 	{
-		String returner = "Poem Type= " + poemType+"\n\n";
-		returner += poemTitle + "\n=================================================\n\n";
+		String returner = "Poem Type= " + poemType+"\n";
+		returner += "=================================================\n" + poemTitle + "\n=================================================\n";
 		for(String line : this.lines)
 		{
 			returner += line+ "\n";
 		}
+		returner += "\n";
 		return returner;
 	}
 }
