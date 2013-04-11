@@ -46,8 +46,6 @@ import org.design.primitives.Poem;
 import org.framework.poemtypes.CoupletPoem;
 import org.framework.poemtypes.HaikuPoem;
 import org.framework.poemtypes.LimerickPoem;
-import org.framework.poemtypes.SonnetPoem;
-import org.framework.poemtypes.TankaPoem;
 import org.framework.recognizers.PoetryRecognizer;
 
 /*
@@ -56,7 +54,7 @@ import org.framework.recognizers.PoetryRecognizer;
  * and incorporate better checking (i.e re-write the logic of the Actionlisteners)
  */
 
-public class PoetryFrame extends JFrame implements ActionListener, MouseListener {
+public class PoetryFrame_demo extends JFrame implements ActionListener, MouseListener {
 	
 	private Container mainContainer = new Container();
 	private Container proseContainer = new Container();
@@ -74,7 +72,7 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 	private JTextArea suggest;
 	
 	
-	public PoetryFrame() {
+	public PoetryFrame_demo() {
 		frameInit();
 		setTitle("Poetry Tool");
 		setLocation(50, 50);
@@ -580,41 +578,34 @@ public class PoetryFrame extends JFrame implements ActionListener, MouseListener
 
 			
 			List<Poem> couplet_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new CoupletPoem());
-			List<Poem> haiku_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new HaikuPoem());
+			//List<Poem> haiku_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new HaikuPoem());
 			List<Poem> limerick_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new LimerickPoem());
-			List<Poem> tanka_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new TankaPoem());
-			List<Poem> sonnet_poem_list = PoetryRecognizer.identifyPoemsFromCorpus(inputFile, new SonnetPoem());
-
-
-//			if(couplet_poem_list.isEmpty())
-//			{
-//				JOptionPane.showMessageDialog(this, "No Couplet poems found");
-//			}
-//			if(haiku_poem_list.isEmpty())
-//			{
-//				JOptionPane.showMessageDialog(this, "No Haiku poems found");
-//			}
-//			if(limerick_poem_list.isEmpty())
-//			{
-//				JOptionPane.showMessageDialog(this, "No Limerick poems found");
-//			}
-			if( true) //!(limerick_poem_list.isEmpty() && //haiku_poem_list.isEmpty() && 
-					//couplet_poem_list.isEmpty()))
+			
+			if(couplet_poem_list.isEmpty())
+			{
+				JOptionPane.showMessageDialog(this, "No Couplet poems found");
+			}
+			/*if(haiku_poem_list.isEmpty())
+			{
+				JOptionPane.showMessageDialog(this, "No Haiku poems found");
+			}*/
+			if(limerick_poem_list.isEmpty())
+			{
+				JOptionPane.showMessageDialog(this, "No Limerick poems found");
+			}
+			if(!(limerick_poem_list.isEmpty() //&& haiku_poem_list.isEmpty() 
+					&& couplet_poem_list.isEmpty()))
 			{
 				String str = "Number of Couplet Poems found are: "+ couplet_poem_list.size();
-				str += "\n" + "Number of Haiku Poems found are: "+ haiku_poem_list.size();
+				//str += "\n" + "Number of Haiku Poems found are: "+ haiku_poem_list.size();
 				str += "\n" + "Number of Limerick Poems found are: "+ limerick_poem_list.size();
-				str += "\n" + "Number of Tanka Poems found are: "+ tanka_poem_list.size();
-				str += "\n" + "Number of Sonnet Poems found are: "+ sonnet_poem_list.size();
 				JOptionPane.showMessageDialog(this, str);
 				
 				java.util.List<Poem> poem_list = new ArrayList<Poem>();
 				
 				poem_list.addAll(couplet_poem_list);
-				poem_list.addAll(haiku_poem_list);
+				//poem_list.addAll(haiku_poem_list);
 				poem_list.addAll(limerick_poem_list);
-				poem_list.addAll(tanka_poem_list);
-				poem_list.addAll(sonnet_poem_list);
 				
 				File file = new File("resources/Poems_Recognized");
 				
