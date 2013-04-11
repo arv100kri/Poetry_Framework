@@ -68,6 +68,8 @@ public class PoetryFrame_demo extends JFrame implements ActionListener, MouseLis
 	private JTextField fileName;
 	private JScrollPane jScrollPane;
 	private JTextField corpus;
+	private JTextArea text;
+	private JTextArea suggest;
 	
 	
 	public PoetryFrame_demo() {
@@ -237,7 +239,7 @@ public class PoetryFrame_demo extends JFrame implements ActionListener, MouseLis
 		GroupLayout g_quat = new GroupLayout(quat);
 		quat.setLayout(g_quat);
 		JLabel scheme = new JLabel("Rhyme Scheme");
-		JComboBox<String> schemeBox = new JComboBox<String>(new String[]{"AABB", "ABAB"});
+		JComboBox<String> schemeBox = new JComboBox<String>(RHYME_SCHEMES);
 		schemeBox.setPreferredSize(new Dimension(100, 25));
 		JLabel meter = new JLabel("Meter");
 		JComboBox<String> meters = new JComboBox<String>(new String[]{"Iambic"});
@@ -361,13 +363,64 @@ public class PoetryFrame_demo extends JFrame implements ActionListener, MouseLis
 	
 	private void initWriteWindow() {
 		writeContainer.setLayout(new BoxLayout(writeContainer, BoxLayout.Y_AXIS));
-		writeContainer.add(new JLabel(WRITE));
 		
+		// Create title and quote
+		JLabel title = new JLabel(WRITE);
+		Font f = title.getFont();
+		title.setFont(new Font(f.getFontName(), f.getStyle(), 24));
+		
+		
+		// Create input panel
+		JPanel input = new JPanel();
+		GroupLayout g = new GroupLayout(input);
+		input.setLayout(g);
+		
+		// Setup components
+		JLabel rhyme = new JLabel("Rhyme Scheme");
+		JComboBox<String> scheme = new JComboBox<String>(RHYME_SCHEMES);
+		text = new JTextArea();
+		JScrollPane sp_text = new JScrollPane(text);
+		sp_text.setMinimumSize(new Dimension(200, 300));
+		
+		JLabel suggestedWords = new JLabel("Suggested Words");
+		suggest = new JTextArea();
+		JScrollPane sp_sug = new JScrollPane(suggest);
+		
+		
+		// Add to group layout
+		SequentialGroup hGroup = g.createSequentialGroup();
+		SequentialGroup h1 = g.createSequentialGroup().addComponent(rhyme).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(scheme);
+		ParallelGroup h2 = g.createParallelGroup().addGroup(h1).addComponent(sp_text);
+		ParallelGroup h3 = g.createParallelGroup().addComponent(suggestedWords).addComponent(sp_sug);
+		hGroup.addContainerGap();
+		hGroup.addGroup(h2).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addGroup(h3);
+		hGroup.addContainerGap();
+		g.setHorizontalGroup(hGroup);
+		
+		SequentialGroup vGroup = g.createSequentialGroup();
+		ParallelGroup v1 = g.createParallelGroup().addComponent(rhyme, 0, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE);
+		v1.addComponent(scheme, 0, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE);
+		SequentialGroup v2 = g.createSequentialGroup().addComponent(suggestedWords).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_sug);
+		ParallelGroup v3 = g.createParallelGroup().addComponent(sp_text).addGroup(v2);
+		vGroup.addGroup(v1).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addGroup(v3);
+		g.setVerticalGroup(vGroup);
+		
+		// Cancel button
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		JButton cancel = new JButton(CANCEL);
 		cancel.addActionListener(this);
+		
+		// Add elements to container
+		writeContainer.add(Box.createVerticalGlue());
+		addAComponent(title, writeContainer);
+		addAComponent(new JLabel("\"Poetry is a deal of joy and pain and wonder, with a dash of the dictionary.\""), writeContainer);
+		addAComponent(new JLabel("-Khalil Gibran"), writeContainer);
+		writeContainer.add(Box.createVerticalGlue());
+		writeContainer.add(input);
+		writeContainer.add(Box.createVerticalGlue());
 		addAComponent(cancel, writeContainer);
+		writeContainer.add(Box.createVerticalGlue());
 	}
 	
 	@Override
@@ -465,6 +518,7 @@ public class PoetryFrame_demo extends JFrame implements ActionListener, MouseLis
 	private static final String JTEXTFIELD = "JTextField";
 	private static final String PLACEHOLDER = "<!---- Insert Prose Here ---- !>";
 //	private static final String JTEXTAREA = "JTextArea";
+	public static final String[] RHYME_SCHEMES = new String[]{"AABB", "ABAB", "ABCB"};
 
 	/*
 	 * Recognize the type of poem
