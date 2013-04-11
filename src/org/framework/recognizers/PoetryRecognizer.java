@@ -191,9 +191,9 @@ public class PoetryRecognizer
 			case Constants.HAIKU_POEM:
 				for(Poem p: potentialHaikuPoems)
 				{
-					//System.out.println(p);
 					if(PoetryRecognizer.isValidPoetry(p))
 					{
+						System.out.println(p);
 						poems_in_corpus.add(p);
 					}
 				}break;
@@ -201,9 +201,9 @@ public class PoetryRecognizer
 			case Constants.COUPLET_POEM:
 				for(Poem p: potentialCoupletPoems)
 				{
-					//System.out.println(p);
 					if(PoetryRecognizer.isValidPoetry(p))
 					{
+						System.out.println(p);
 						poems_in_corpus.add(p);
 					}
 				}break;
@@ -211,7 +211,7 @@ public class PoetryRecognizer
 			case Constants.LIMERICK_POEM:
 				for(Poem p: potentialLimerickPoems)
 				{
-					//System.out.println(p);
+					System.out.println(p);
 					if(PoetryRecognizer.isValidPoetry(p))
 					{
 						poems_in_corpus.add(p);
