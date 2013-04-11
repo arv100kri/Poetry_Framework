@@ -113,6 +113,7 @@ public class SimpleRhymeWords
 		    // read the output from the command
 		    //System.out.println("Here is the standard output of the command:");
 		    String s = stdInput.readLine();
+		    System.out.println(s);
 		    s = s.substring(1, s.length() - 1);
 		    String [] splitters = s.split(", ");
 		    for(String str: splitters)
